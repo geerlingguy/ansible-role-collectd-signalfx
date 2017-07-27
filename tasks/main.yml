@@ -6,7 +6,7 @@
 
 - name: Get SignalFx's collectd installer.
   get_url:
-    url: "{{ signalfx_collectd_installer_url }}"
+    url: "{{ collectd_installer_url }}"
     dest: /tmp/collectd-install
     mode: 0754
   when: collectd_bin.stat.exists != True
