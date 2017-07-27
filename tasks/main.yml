@@ -12,8 +12,7 @@
   when: collectd_bin.stat.exists != True
 
 - name: Run the collectd installer using the provided token.
-  command: >
-    {{ collectd_install_command }}
+  command: "{{ collectd_install_command }}"
   when: collectd_bin.stat.exists != True
 
 - name: Ensure configured integration configurations are added.
