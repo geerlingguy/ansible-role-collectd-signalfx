@@ -13,7 +13,9 @@
 
 - name: Run the collectd installer using the provided token.
   command: "{{ collectd_install_command }}"
-  when: collectd_bin.stat.exists != True
+  when:
+    - collectd_bin.stat.exists != True
+    - collectd_role_test_mode != True
 
 - name: Ensure configured integration configurations are added.
   get_url:
