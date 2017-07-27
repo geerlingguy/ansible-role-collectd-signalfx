@@ -1,0 +1,26 @@
+---
+# Be sure to add your SignalFx token, otherwise collectd stats won't transmit!
+signalfx_token: ''
+
+# These values shouldn't generally need to be changed.
+collectd_installer_url: https://dl.signalfx.com/collectd-install
+collectd_install_command: "/tmp/collectd-install {{ signalfx_token }} -y"
+collectd_bin_path: /usr/sbin/collectd
+
+# Add list items with keys `url` and `filename` to download managed config files
+# from a URL to the collectd managed_config directory. Adding a new item will
+# trigger a restart of collectd at the end of the playbook run.
+collectd_signalfx_managed_config: []
+  # - url: https://raw.githubusercontent.com/signalfx/integrations/master/collectd-varnish/10-varnish.conf
+  #   filename: 10-varnish.conf
+  # - url: https://raw.githubusercontent.com/signalfx/integrations/master/collectd-nginx/10-nginx.conf
+  #   filename: 10-nginx.conf
+
+# Add list items with keys `filename`, `regexp`, and `line` to change managed
+# config file lines. This is most useful if you just need to do something like
+# change a port number or switch a flag. For anything more complex, you should
+# copy your own template.
+collectd_managed_config_changes: []
+  # - filename: 10-nginx.conf
+  #   regexp: '^  URL.+nginx_status"$'
+  #   line: '  URL "http://localhost:81/nginx_status"'
