@@ -33,3 +33,11 @@
     state: "{{ item.state | default('present') }}"
   with_items: "{{ collectd_managed_config_changes }}"
   notify: restart collectd
+
+- name: Ensure SignalFx token is current.
+  lineinfile:
+    dest: /etc/collectd/managed_config/10-signalfx.conf
+    regexp: '^.+Token ".+"$'
+    line: '    Token "{{ signalfx_token }}"'
+    state: present
+  notify: restart collectd
