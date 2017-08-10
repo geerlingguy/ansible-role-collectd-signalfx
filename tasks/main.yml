@@ -36,9 +36,14 @@
 
 - name: Ensure SignalFx token is current.
   lineinfile:
-    dest: /etc/collectd/managed_config/10-signalfx.conf
-    regexp: '^.+Token ".+"$'
-    line: '    Token "{{ signalfx_token }}"'
+    dest: "/etc/collectd/managed_config/{{ item.file }}"
+    regexp: '^.+{{ item.variable }} ".+"$'
+    line: '    {{ item.variable }} "{{ signalfx_token }}"'
     state: present
   notify: restart collectd
+  with_items:
+    - file: 10-signalfx.conf
+      variable: 'Token'
+    - file: 10-write_http-plugin.conf
+      variable: 'Password'
   when: collectd_role_test_mode != True
