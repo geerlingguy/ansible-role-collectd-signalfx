@@ -41,3 +41,4 @@
     line: '    Token "{{ signalfx_token }}"'
     state: present
   notify: restart collectd
+  when: collectd_role_test_mode != True
