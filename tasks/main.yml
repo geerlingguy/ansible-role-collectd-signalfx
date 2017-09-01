@@ -17,6 +17,21 @@
     - collectd_bin.stat.exists != True
     - collectd_role_test_mode != True
 
+- name: Set collectd hostname (if configured).
+  lineinfile:
+    dest: /etc/collectd/collectd.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    insertbefore: "{{ item.insertbefore | default('') }}"
+  with_items:
+    - regexp: "^FQDNLookup .+$"
+      line: "FQDNLookup false"
+    - regexp: "^Hostname .+$"
+      line: 'Hostname "{{ collectd_hostname }}"'
+      insertbefore: "^FQDNLookup.+$"
+  when: collectd_hostname != ""
+  notify: restart collectd
+
 - name: Ensure configured integration configurations are added.
   get_url:
     url: "{{ item.url }}"

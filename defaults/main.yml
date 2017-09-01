@@ -2,6 +2,9 @@
 # Be sure to add your SignalFx token, otherwise collectd stats won't transmit!
 signalfx_token: ''
 
+# If not set, the FQDN will be used.
+collectd_hostname: ''
+
 # These values shouldn't generally need to be changed.
 collectd_installer_url: https://dl.signalfx.com/collectd-install
 collectd_install_command: "/tmp/collectd-install {{ signalfx_token }} -y"

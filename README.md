@@ -16,6 +16,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 Set your SignalFx token, otherwise collectd stats won't transmit!
 
+    collectd_hostname: ''
+
+Explicitly set a Hostname. If left empty, the server FQDN will be used instead.
+
     collectd_installer_url: https://dl.signalfx.com/collectd-install
     collectd_install_command: "/tmp/collectd-install {{ signalfx_token }} -y"
     collectd_bin_path: /usr/sbin/collectd
