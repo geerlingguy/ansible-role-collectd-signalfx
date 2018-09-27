@@ -1,8 +1,10 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
+  become: true
 
   vars:
-    collectd_role_test_mode: yes
+    collectd_role_test_mode: true
     collectd_signalfx_managed_config:
       - url: https://raw.githubusercontent.com/signalfx/integrations/master/collectd-nginx/10-nginx.conf
         filename: 10-nginx.conf
@@ -13,7 +15,7 @@
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
+      apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies.
@@ -23,7 +25,7 @@
       file:
         path: /etc/collectd/managed_config
         state: directory
-        recurse: yes
+        recurse: true
 
   roles:
-    - role_under_test
+    - geerlingguy.collectd-signalfx
