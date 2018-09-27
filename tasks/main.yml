@@ -39,6 +39,7 @@
     mode: 0644
   with_items: "{{ collectd_signalfx_managed_config }}"
   notify: restart collectd
+  tags: ['skip_ansible_lint']
 
 - name: Change managed configurations if needed.
   lineinfile:
@@ -48,6 +49,7 @@
     state: "{{ item.state | default('present') }}"
   with_items: "{{ collectd_managed_config_changes }}"
   notify: restart collectd
+  tags: ['skip_ansible_lint']
 
 - name: Ensure SignalFx token is current.
   lineinfile:
