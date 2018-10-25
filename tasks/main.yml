@@ -9,13 +9,13 @@
     url: "{{ collectd_installer_url }}"
     dest: /tmp/collectd-install
     mode: 0754
-  when: collectd_bin.stat.exists != True
+  when: not collectd_bin.stat.exists
 
 - name: Run the collectd installer using the provided token.
   command: "{{ collectd_install_command }}"
   when:
-    - collectd_bin.stat.exists != True
-    - collectd_role_test_mode != True
+    - not collectd_bin.stat.exists
+    - not collectd_role_test_mode
 
 - name: Set collectd hostname (if configured).
   lineinfile:
@@ -29,7 +29,7 @@
     - regexp: "^Hostname .+$"
       line: 'Hostname "{{ collectd_hostname }}"'
       insertbefore: "^FQDNLookup.+$"
-  when: collectd_hostname != ""
+  when: collectd_hostname
   notify: restart collectd
 
 - name: Ensure configured integration configurations are added.
@@ -61,4 +61,4 @@
       variable: 'Token'
     - file: 10-write_http-plugin.conf
       variable: 'Password'
-  when: collectd_role_test_mode != True
+  when: not collectd_role_test_mode
