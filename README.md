@@ -1,4 +1,4 @@
-# Ansible Role: Nginx
+# Ansible Role: Collectd for SignalFx
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-collectd-signalfx.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-collectd-signalfx)
 
