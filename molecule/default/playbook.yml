@@ -6,10 +6,10 @@
   vars:
     collectd_role_test_mode: true
     collectd_signalfx_managed_config:
-      - url: https://raw.githubusercontent.com/signalfx/integrations/master/collectd-nginx/10-nginx.conf
-        filename: 10-nginx.conf
+      - url: https://raw.githubusercontent.com/signalfx/integrations/master/collectd-nginx-plus/10-nginx-plus.conf
+        filename: 10-nginx-plus.conf
     collectd_managed_config_changes:
-      - filename: 10-nginx.conf
+      - filename: 10-nginx-plus.conf
         regexp: '^  URL.+nginx_status"$'
         line: '  URL "http://localhost:81/nginx_status"'
 
