@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    collectd_role_test_mode: true
+    collectd_signalfx_managed_config:
+      - url: https://raw.githubusercontent.com/signalfx/integrations/master/collectd-nginx-plus/10-nginx-plus.conf
+        filename: 10-nginx-plus.conf
+    collectd_managed_config_changes:
+      - filename: 10-nginx-plus.conf
+        regexp: '^  URL.+nginx_status"$'
+        line: '  URL "http://localhost:81/nginx_status"'
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: Install test dependencies.
+      package: name=curl state=present
+
+    - name: Create directory for managed_config test purposes.
+      file:
+        path: /etc/collectd/managed_config
+        state: directory
+        recurse: true
+
+  roles:
+    - geerlingguy.collectd-signalfx
