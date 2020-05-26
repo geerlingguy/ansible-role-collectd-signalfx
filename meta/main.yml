@@ -2,7 +2,8 @@
 dependencies: []
 
 galaxy_info:
-  role_name: collectd-signalfx
+  # See: https://github.com/ansible/galaxy/issues/2393
+  # role_name: collectd-signalfx
   author: geerlingguy
   description: SignalFx Collectd installation for Linux.
   company: Midwestern Mac, LLC
