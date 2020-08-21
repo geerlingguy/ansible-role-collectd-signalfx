@@ -23,6 +23,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     insertbefore: "{{ item.insertbefore | default('') }}"
+    mode: 0644
   with_items:
     - regexp: "^FQDNLookup .+$"
       line: "FQDNLookup false"
@@ -46,6 +47,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: "{{ item.state | default('present') }}"
+    mode: 0644
   with_items: "{{ collectd_managed_config_changes }}"
   notify: restart collectd
 
@@ -55,6 +57,7 @@
     regexp: '^.+{{ item.variable }} ".+"$'
     line: '    {{ item.variable }} "{{ signalfx_token }}"'
     state: present
+    mode: 0644
   notify: restart collectd
   with_items:
     - file: 10-signalfx.conf

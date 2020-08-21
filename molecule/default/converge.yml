@@ -22,7 +22,7 @@
       package: name=curl state=present
 
     - name: Create directory for managed_config test purposes.
-      file:
+      file:  # noqa 208
         path: /etc/collectd/managed_config
         state: directory
         recurse: true
