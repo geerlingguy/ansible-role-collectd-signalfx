@@ -1,6 +1,6 @@
 # Ansible Role: Collectd for SignalFx
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-collectd-signalfx.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-collectd-signalfx)
+[![CI](https://github.com/geerlingguy/ansible-role-collectd-signalfx/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-collectd-signalfx/actions?query=workflow%3ACI)
 
 Installs [SignalFx's fork of Collectd](https://github.com/signalfx/signalfx-collectd-installer) on Linux servers, and allows easy management of collectd integrations for SignalFx.
 
